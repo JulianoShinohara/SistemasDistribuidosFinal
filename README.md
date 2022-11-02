@@ -1,2 +1,1 @@
-# Turistando - Projeto Final
-# Sistemas Distribuidos
+# Sistemas Distribuidos - Projeto Final
