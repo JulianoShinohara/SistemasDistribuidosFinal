@@ -46,7 +46,7 @@ module.exports = {
     },
     backgroundImage: {
       "logo": "url('/images/logo.png')",
-      "header": "url('/images/header.png')",
+      "header": "url('/images/background.png')",
     }
   },
   },

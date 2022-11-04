@@ -4,9 +4,10 @@ import { Button } from "../../components/Button";
 export default function Header() {
 
   return (
-    <div className="absolute w-full bg-cover bg-black p-5">
-     
-        <div className="w-5 h-5 bg-no-repeat bg-logo"/>
+    <div className="absolute w-full bg-cover bg-header p-5">
+      <div className="">
+        <div className="bg-auto  bg-logo"/>
+      </div>
 
         <div className="text-right">
           <Button 
