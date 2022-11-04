@@ -18,7 +18,8 @@ module.exports = {
       "grayText": "#626562",
       "grayBg": "#EFEFEF",
       "warning": "#F46262",
-      "Input":  "rgba(67, 65, 88, 0.13)",
+      "Input":  "#CFDFEC",
+      "TextSelectInput": "#6796BF"
     },
     fontSize: {
       
