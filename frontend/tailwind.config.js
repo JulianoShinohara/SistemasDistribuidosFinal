@@ -10,6 +10,7 @@ module.exports = {
       "bgBlue": "#CFDFEC",
       "bgDivBlue": "#DFEAF4",
       "textTitle": "#40A798",
+      "textInput":  "rgba(64, 167, 152, 0.58)",
       "optionWhite": "#FAFAFA",
       "Input2": "#F5F5F5",
       "grayText": "#626562",
