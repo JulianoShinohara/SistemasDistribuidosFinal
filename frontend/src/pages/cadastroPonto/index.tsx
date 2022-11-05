@@ -1,5 +1,6 @@
 import 'remixicon/fonts/remixicon.css';
 import React, { useCallback, useState } from "react"
+import router from 'next/router';
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { Input } from "../../components/Input"
@@ -8,8 +9,12 @@ import CityValues from '../../contents/city';
 import { divBack, divGeneral, divImage, divInput, divRegister, textTitle } from "./styles"
 
 export default function PlaceRegistration() {
+  const [name, setName] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [complement, setComplement] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>(''); 
+  const [image, setImage] = useState<string>('');
 
   const handleUF = useCallback((state:string) => {
     setState(state)
@@ -18,7 +23,10 @@ export default function PlaceRegistration() {
   const handleCity = useCallback((city:string) => {
     setCity(city)
   }, [])
-    
+  
+  function goBack() {
+    router.push('/PesquisarLocais')
+  }
   return (
     <div>
       <Header/>
@@ -30,6 +38,7 @@ export default function PlaceRegistration() {
           
           <button 
             className="underline"
+            onClick={goBack}
           >
             Voltar
           </button>
@@ -44,6 +53,8 @@ export default function PlaceRegistration() {
             label='Nome' 
             placeholder='ex: Parque nacional da Tijuca'
             top='mt-5'
+            value={name} 
+            onChange={(e) => setName(e.target.value)}
           />
           <div className={divInput}>
             <Input 
@@ -51,6 +62,8 @@ export default function PlaceRegistration() {
               label='Endereço' 
               placeholder='ex: av. paulista, 1000' 
               top='mt-5'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
 
             <Input 
@@ -58,6 +71,8 @@ export default function PlaceRegistration() {
               label='Complemento' 
               placeholder='ex: apt, bloco, etc' 
               top='mt-5'
+              value={complement}
+              onChange={(e) => setComplement(e.target.value)}
             />
 
           </div>
@@ -82,10 +97,16 @@ export default function PlaceRegistration() {
           </div>
           
           <div className={divImage}>
-            <input type='file' id='image' multiple/>
+            <Input   
+              haslabel
+              label='Adicone uma imagem'           
+              type='file' 
+              id='image' 
+              multiple             
+              />
           </div>
 
-          <div className="pt-12">
+          <div className="pt-8">
             <Button 
               bg='bg-textTitle' 
               rounded='rounded' 
