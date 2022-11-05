@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import { Input } from "../../components/Input"
 import { Select } from "../../components/Select"
 import CityValues from '../../contents/city';
-import { divBack, divGeneral, divInput, divRegister, textTitle } from "./styles"
+import { divBack, divGeneral, divImage, divInput, divRegister, textTitle } from "./styles"
 
 export default function PlaceRegistration() {
   const [state, setState] = useState<string>('');
@@ -81,7 +81,7 @@ export default function PlaceRegistration() {
             </Select>
           </div>
           
-          <div className='bg-Input w-full p-5 mt-10 rounded-lg'>
+          <div className={divImage}>
             <input type='file' id='image' multiple/>
           </div>
 
