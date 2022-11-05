@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import { Input } from "../../components/Input"
 import { Select } from "../../components/Select"
 import CityValues from '../../contents/city';
-import { divGeneral, divInput, divRegister, textTitle } from "./styles"
+import { divBack, divGeneral, divInput, divRegister, textTitle } from "./styles"
 
 export default function PlaceRegistration() {
   const [state, setState] = useState<string>('');
@@ -25,8 +25,9 @@ export default function PlaceRegistration() {
       
       <div className={divGeneral}>
        {/*  por enquanto esta no meio, pq nao estou conseguindo alinhar com a divRegister */}
-        <div  className=" p-2 space-x-1 flex justify-center ">
+        <div  className={divBack}>
           <i className="ri-arrow-go-back-line"></i>
+          
           <button 
             className="underline"
           >
@@ -80,6 +81,10 @@ export default function PlaceRegistration() {
             </Select>
           </div>
           
+          <div className='bg-Input w-full p-5 mt-10 rounded-lg'>
+            <input type='file' id='image' multiple/>
+          </div>
+
           <div className="pt-12">
             <Button 
               bg='bg-textTitle' 
