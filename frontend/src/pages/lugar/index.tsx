@@ -50,14 +50,17 @@ export default function Search() {
               <div>
                 <div className='flex items-center pt-10 justify-between'>
                   <h1 className={textTitle}>{place.name}</h1>
-                  <div className='abs'>
-                      <button onClick={useButtonStar} className={`${starButton ? 'ri-star-fill text-orange-300' : 'ri-star-line text-stone-700'} ri-2x`}/>
-                  </div>
+                 
+                  <button onClick={useButtonStar} className={`${starButton ? 'ri-star-fill text-yellow-300' : 'ri-star-line text-stone-700'} ri-2x`}/>
+                  
                 </div>
+
                 <h1 className={textLocation}>{place.city} - {place.state}</h1>
+
                 <div className='w-559 h-462 bg-black rounded-3xl'>
 
                 </div>
+                
                 <h1 className=' text-2xl'>
                   <i className="ri-map-pin-line"></i>
                   <b className='px-2'>Endereço</b>{place.address}
