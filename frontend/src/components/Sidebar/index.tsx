@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Select } from '../Select';
 import CityValues from '../../contents/city';
-import { divGeneral, divInput, line, textTitle } from './styles';
+import { divGeneral, divInput, divInput2, line, textTitle } from './styles';
 import { Button } from '../Button';
+import router from 'next/router';
 
 export default function Sidebar() { 
     const [state, setState] = useState<string>('');
@@ -16,17 +17,22 @@ export default function Sidebar() {
     setCity(city)
     }, [])
 
+    function goRegistration() {
+        router.push('/cadastrarPonto')
+    }
+      
     return ( 
         <div className={divGeneral}> 
             <div className={line}>
-                <div className={divInput}>
+                <div className={divInput2}>
                     <Button 
-                    bg='bg-textTitle' 
-                    rounded='rounded' 
-                    w='w-full' 
-                    h='h-12' 
-                    textColor='text-white' 
-                    textWeight='font-semibold'
+                        bg='bg-textTitle' 
+                        rounded='rounded-none' 
+                        w='w-full' 
+                        h='h-12' 
+                        textColor='text-white' 
+                        textWeight='font-semibold'
+                        onClick={goRegistration}
                     >
                         CADASTRAR PONTO TURISTICO
                     </Button>
@@ -51,11 +57,11 @@ export default function Sidebar() {
                     </Select>
                 </div>
 
-                <div className={divInput}>
+                <div className={divInput2}>
                     <div className='pt-10'>
                         <Button 
                         bg='bg-textTitle' 
-                        rounded='rounded' 
+                        rounded='rounded-none' 
                         w='w-full' 
                         h='h-14' 
                         textColor='text-white' 
