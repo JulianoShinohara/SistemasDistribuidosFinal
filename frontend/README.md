@@ -28,5 +28,5 @@ yarn dev
 ### Contato
 | Nome                          | Contato                                |
 | ----------------------------- |:--------------------------------------:|
-| Gabriela Marangoni Radigonda  | gabrielaradigonda@alunos.utfpr.edu.br   |
-| Juliano Kendyi Shinohara      |        |
+| Gabriela Marangoni Radigonda  | gabrielaradigonda@alunos.utfpr.edu.br  |
+| Juliano Kendyi Shinohara      | julianoshinohara@alunos.utfpr,edu.br   |
