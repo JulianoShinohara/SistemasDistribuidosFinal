@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Select } from '../Select';
 import CityValues from '../../contents/city';
-import { divGeneral, divInput, line } from './styles';
+import { divGeneral, divInput, line, textTitle } from './styles';
 import { Button } from '../Button';
 
 export default function Sidebar() { 
@@ -20,6 +20,19 @@ export default function Sidebar() {
         <div className={divGeneral}> 
             <div className={line}>
                 <div className={divInput}>
+                    <Button 
+                    bg='bg-textTitle' 
+                    rounded='rounded' 
+                    w='w-full' 
+                    h='h-12' 
+                    textColor='text-white' 
+                    textWeight='font-semibold'
+                    >
+                        CADASTRAR PONTO TURISTICO
+                    </Button>
+                </div>
+                <div className={divInput}>
+                    <h1 className={textTitle}>Pesquisar Ponto de interesse</h1>
                     <Select onChange = {(e) => handleUF(e.target.value)} value = {state} 
                         haslabel label='Estado' top='mt-5'
                         >
@@ -51,7 +64,6 @@ export default function Sidebar() {
                             FILTRAR
                         </Button>
                     </div>
-
                 </div>
 
             </div>
