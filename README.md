@@ -24,7 +24,7 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 ## Funcionalidades
 1 - O cliente realiza o login <br /> 
 2 - O cliente pode adiconar um ponto de interesse <br /> 
- <br /> <br /> 
+ <br />
 1 - o cliente realiza o login <br /> 
 2 - o cliente pode pesquisar por um ponto de interesse através de estado e cidade ou apenas o estado  <br /> 
 3 - o cliente pode adicionar um novo comentario dentro do ponto de interesse <br /> 
