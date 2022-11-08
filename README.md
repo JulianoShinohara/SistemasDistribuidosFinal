@@ -37,6 +37,6 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 | Nome                          | Contato                                |
 | ----------------------------- |:--------------------------------------:|
 | Gabriela Marangoni Radigonda  | gabrielaradigonda@alunos.utfpr.edu.br  |
-| Juliano Kendyi Shinohara      | julianoshinohara@alunos.utfpr,edu.br   |
+| Juliano Kendyi Shinohara      | julianoshinohara@alunos.utfpr.edu.br   |
 
 
