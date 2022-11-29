@@ -4,7 +4,7 @@ export interface IPlace {
     city: string;
     state: string;
     image: string;
-    comentary: string;
+    commentary: string;
     address: string;
     favorite: boolean;
     numberOfLikes: number;

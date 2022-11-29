@@ -1,16 +1,39 @@
 import 'remixicon/fonts/remixicon.css';
 import React, { useEffect, useState } from "react"
 import router from 'next/router';
-import { divComentary, divGeneral, divStyleTitle, line, textLocation, textTitle } from "./styles"
+import { divCommentary, divGeneral, divStyleTitle, line, textLocation, textTitle } from "./styles"
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import { IPlace } from '../../models/IPlace';
 import { Button } from '../../components/Button';
-import Comentary from '../../components/Comentary';
+import { Modal } from '../../components/Modal';
+import { TextArea } from '../../components/TextArea';
+import Commentary from '../../components/Commentary';
+
+type CommentaryType = {
+  commentary: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  openAddModal: boolean;
+}
 
 export default function Search() {
   const [place, setPlace] = useState<IPlace[]>([] as IPlace[]);
   const [starButton, setStarButton] = useState(false);
+  const [commentaryStates, setCommentaryStates] = useState<CommentaryType>({ } as CommentaryType);
+  
+  function handleButtonAddCommentary(){
+    setCommentaryStates({...commentaryStates, openAddModal: !commentaryStates.openAddModal});
+  }
+
+  async function handleAddCommentary() {
+    if(commentaryStates.commentary){
+     
+      
+    handleButtonAddCommentary();
+    }
+  }
 
   function getPlace(){
     setTimeout(() => {
@@ -20,7 +43,7 @@ export default function Search() {
         city: 'Navegantes' ,
         state: 'SC',
         image: '',
-        comentary: 'Lugar lindo e familiar com uma vista maravilhosa e um pôr do sol incrível. Recomendo muito! Supeeer!!',
+        commentary: 'Lugar lindo e familiar com uma vista maravilhosa e um pôr do sol incrível. Recomendo muito! Supeeer!!',
         address: 'Rua gravata, 100',
         favorite: false,
         numberOfLikes: 20,
@@ -77,25 +100,26 @@ export default function Search() {
                     h='h-10' 
                     textColor='text-white' 
                     textWeight='font-semibold'
+                    onClick={handleButtonAddCommentary}
                   >
                       Adicionar comentário
                   </Button>
                 </div>   
 
-                <div className={divComentary}>
+                <div className={divCommentary}>
                   <div className={line}>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
-                    <Comentary place={place}/>  
-                    <Comentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
+                    <Commentary place={place}/>  
+                    <Commentary place={place}/>
                   </div>
                 </div>
                
@@ -104,6 +128,36 @@ export default function Search() {
 
           )
           })}
+
+          <Modal 
+              isOpen={commentaryStates.openAddModal} 
+              onClose={handleButtonAddCommentary} 
+              title='Adicionar Comentário'
+              footer={
+                  <Button 
+                      bg='bg-textTitle' 
+                      rounded='rounded' 
+                      w='w-full' 
+                      h='h-12' 
+                      textColor='text-white' 
+                      textWeight='font-bold'
+                      onClick={handleAddCommentary}
+                  >
+                      Salvar
+                  </Button>
+              }
+          >
+              <div className='flex flex-col'>
+                <TextArea 
+                haslabel 
+                label='Comentário' 
+                placeholder='ex: Lugar bonito'                       
+                top='mt-2'  
+                value={commentaryStates.commentary}   
+                onChange={(e) => setCommentaryStates({ ...commentaryStates, commentary: e.target.value })}                                      
+              />                   
+              </div>
+          </Modal>
       </div>  
     </div>  
   )
