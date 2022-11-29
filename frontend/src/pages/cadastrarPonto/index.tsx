@@ -11,7 +11,6 @@ import { divBack, divGeneral, divImage, divInput, divRegister, textTitle } from 
 export default function PlaceRegistration() {
   const [name, setName] = useState<string>('');
   const [address, setAddress] = useState<string>('');
-  const [complement, setComplement] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>(''); 
   const [image, setImage] = useState<string>('');
@@ -64,16 +63,7 @@ export default function PlaceRegistration() {
               top='mt-5'
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-            />
-
-            <Input 
-              haslabel 
-              label='Complemento' 
-              placeholder='ex: apt, bloco, etc' 
-              top='mt-5'
-              value={complement}
-              onChange={(e) => setComplement(e.target.value)}
-            />
+            />           
 
           </div>
 

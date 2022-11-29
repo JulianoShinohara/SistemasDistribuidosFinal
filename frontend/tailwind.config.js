@@ -15,7 +15,6 @@ module.exports = {
       "textInput":  "rgba(64, 167, 152, 0.58)",
       "optionWhite": "#FAFAFA",
       "Input2": "#F5F5F5",
-      "grayText": "#626562",
       "grayBg": "#EFEFEF",
       "warning": "#F46262",
       "Input":  "#CFDFEC",
