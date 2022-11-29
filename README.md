@@ -1,4 +1,23 @@
 # Sistemas Distribuidos - Projeto Final
+
+## FRONTEND
+
+Para rodar o frontend, digitar:
+
+Primeiro instale as dependencias
+```
+yarn
+```
+Depois de instalado, execute:
+```
+yarn dev
+```
+
+Para visualizar a página que esta sendo feita, basta digitar na url o nome da pasta. Exemplo:
+```
+http://localhost:3000/cadastroPonto
+```
+## Sistema
 O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para compartilhamento e busca de opniões e localizações para passeios. O usuário poderá selecionar a cidade de seu interesse e través de opniões de outros usuários poderá ver qual o melhor passeio para ele.
 
 ## Principais funcionalidades
@@ -38,5 +57,3 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 | ----------------------------- |:--------------------------------------:|
 | Gabriela Marangoni Radigonda  | gabrielaradigonda@alunos.utfpr.edu.br  |
 | Juliano Kendyi Shinohara      | julianoshinohara@alunos.utfpr.edu.br   |
-
-
