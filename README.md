@@ -13,10 +13,6 @@ Depois de instalado, execute:
 yarn dev
 ```
 
-Para visualizar a página que esta sendo feita, basta digitar na url o nome da pasta. Exemplo:
-```
-http://localhost:3000/cadastroPonto
-```
 ## Sistema
 O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para compartilhamento e busca de opniões e localizações para passeios. O usuário poderá selecionar a cidade de seu interesse e través de opniões de outros usuários poderá ver qual o melhor passeio para ele.
 
@@ -47,7 +43,6 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 1 - o cliente realiza o login <br /> 
 2 - o cliente pode pesquisar por um ponto de interesse através de estado e cidade ou apenas o estado  <br /> 
 3 - o cliente pode adicionar um novo comentario dentro do ponto de interesse <br /> 
-4 - o cliente pode adicionar aos favoritos o ponto de interesse<br /> 
 
 ## Arquitetura e funcionamento do sistema
 ![alt text](arquitetura-do-sistema.png)
