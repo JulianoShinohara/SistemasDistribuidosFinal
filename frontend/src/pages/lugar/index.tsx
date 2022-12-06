@@ -45,8 +45,6 @@ export default function Search() {
         image: '',
         commentary: 'Lugar lindo e familiar com uma vista maravilhosa e um pôr do sol incrível. Recomendo muito! Supeeer!!',
         address: 'Rua gravata, 100',
-        favorite: false,
-        numberOfLikes: 20,
       }
 
       ])
@@ -73,9 +71,6 @@ export default function Search() {
               <div>
                 <div className='flex items-center pt-10 justify-between'>
                   <h1 className={textTitle}>{place.name}</h1>
-                 
-                  <button onClick={useButtonStar} className={`${starButton ? 'ri-star-fill text-yellow-300' : 'ri-star-line text-stone-700'} ri-2x`}/>
-                  
                 </div>
 
                 <h1 className={textLocation}>{place.city} - {place.state}</h1>

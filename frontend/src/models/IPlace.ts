@@ -6,6 +6,4 @@ export interface IPlace {
     image: string;
     commentary: string;
     address: string;
-    favorite: boolean;
-    numberOfLikes: number;
 }

@@ -8,8 +8,6 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     h?:string;
     textColor?: string;
     textWeight?: string;
-    icon?: string;
-    iconSize?: string;
 }
 function Button({
     bg='bg-transparent',
@@ -18,12 +16,10 @@ function Button({
     textWeight='font-normal',
     w, 
     h, 
-    icon,
-    iconSize='ri-2x',
     ...rest 
 }: IButtonProps) {
     return (           
-        <button className={`${buttonStyle} ${iconSize} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight} ${icon}`} 
+        <button className={`${buttonStyle} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight}`} 
         {...rest}
         />        
     );

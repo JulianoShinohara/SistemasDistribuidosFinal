@@ -4,8 +4,11 @@ import CityValues from '../../contents/city';
 import { divGeneral, divInput, divInput2, line, textTitle } from './styles';
 import { Button } from '../Button';
 import router from 'next/router';
+import { InfoNavSection } from './InfoNavSection';
+import { signOut, useSession } from 'next-auth/client';
 
 export default function Sidebar() { 
+    const [session] = useSession();
     const [state, setState] = useState<string>('');
     const [city, setCity] = useState<string>(''); 
 
@@ -16,6 +19,10 @@ export default function Sidebar() {
     const handleCity = useCallback((city:string) => {
     setCity(city)
     }, [])
+
+    const logout = useCallback(() => {
+        signOut({ callbackUrl: '/' });
+    }, []);
 
     function goRegistration() {
         router.push('/cadastrarPonto')
@@ -73,6 +80,11 @@ export default function Sidebar() {
                 </div>
 
             </div>
+            <InfoNavSection 
+                email={session ? session.user.email as string : ''} 
+                name={session ? session.user.name as string: ''} 
+                logout={logout} 
+            />
         </div>
     );
 }

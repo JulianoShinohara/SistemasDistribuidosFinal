@@ -20,8 +20,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -30,8 +28,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -40,8 +36,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -50,8 +44,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -60,8 +52,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -70,8 +60,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -80,8 +68,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -90,8 +76,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       },
       { id: '1',
         name: 'Praia de Gravata ',
@@ -100,8 +84,6 @@ export default function Search() {
         image: '',
         commentary: 'ggfg',
         address: 'gfgfg',
-        favorite: false,
-        numberOfLikes: 20,
       }
 
       ])
@@ -118,8 +100,8 @@ export default function Search() {
       <Sidebar/>
 
       <div className={divGeneral}>   
-        {place.map(place => (
-          <Place place={place}/>
+        {place.map((place, i) => (
+          <Place key={i} place={place}/>
         ))}
       </div>  
     </div>  

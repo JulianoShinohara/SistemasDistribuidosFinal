@@ -1,18 +1,16 @@
 import '../styles/globals.css'
-import { SessionProvider} from 'next-auth/react'
-import type { AppProps } from 'next/app'
+import { Provider as NextAuthProvider } from 'next-auth/client'
+import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 
 
-function MyApp({ Component, pageProps: { session, ... pageProps} }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return(
-    <SessionProvider session={session}>
-      <ChakraProvider>
-        
-          <Component {...pageProps} />
-        
+    <NextAuthProvider session={pageProps.session}>
+      <ChakraProvider>        
+          <Component {...pageProps} />        
       </ChakraProvider>
-    </SessionProvider>
+    </NextAuthProvider>
    
   )
 }
