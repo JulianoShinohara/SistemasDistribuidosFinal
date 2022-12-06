@@ -1,6 +1,6 @@
 import 'remixicon/fonts/remixicon.css';
 import React, { useCallback, useState } from "react"
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { Input } from "../../components/Input"
@@ -21,13 +21,14 @@ export interface ICadastro {
 
 export default function PlaceRegistration() {
   const [cadastro, setCadastro] = useState<ICadastro>({} as ICadastro);
+  const router = useRouter();
 
   const [name, setName] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>(''); 
   const [commentary, setCommentary] = useState<string>(''); 
-  const [image, setImage] = useState<string>('');
+  const [imgs, setImgs] = useState<string>('');
 
 
   const handleUF = useCallback((state:string) => {
@@ -41,6 +42,19 @@ export default function PlaceRegistration() {
   function goBack() {
     router.push('/PesquisarLocais')
   }
+
+  const registerFunction = useCallback((name: any, state: any, city: any, commentary: any, address: any, images: any) => {
+    api.post('/places/total', {
+        name,
+        city,
+        state,
+        images,
+        commentary,
+        address
+    }).then(() => router.push('/PesquisarLocais'))
+}, [])
+
+  
 
   return (
     <div>
@@ -61,7 +75,7 @@ export default function PlaceRegistration() {
 
           <Input 
             haslabel 
-            label='Nome' 
+            label='*Nome' 
             placeholder='ex: Parque nacional da Tijuca'
             top='mt-5'
             value={cadastro.name} 
@@ -70,7 +84,7 @@ export default function PlaceRegistration() {
           <div className={divInput}>
             <Input 
               haslabel 
-              label='Endereço' 
+              label='*Endereço' 
               placeholder='ex: av. paulista, 1000' 
               top='mt-5'
               value={cadastro.address}
@@ -79,7 +93,7 @@ export default function PlaceRegistration() {
           </div>
           <TextArea
             haslabel 
-            label='Comentário' 
+            label='*Comentário' 
             placeholder='ex: Lugar lindo'
             top='mt-5'
             value={cadastro.commentary}
@@ -88,7 +102,7 @@ export default function PlaceRegistration() {
 
           <div className={divInput}>
             <Select onChange = {(e) => handleUF(e.target.value)} value = {cadastro.state} 
-                haslabel label='Estado' top='mt-5'
+                haslabel label='*Estado' top='mt-5'
                 >
                 <option key = 'init'>Selecione o Estado</option>
                 {CityValues.estados.map((uf, index) => (
@@ -96,7 +110,7 @@ export default function PlaceRegistration() {
                 ))}
             </Select>
             <Select onChange = {(e) => handleCity(e.target.value)} value = {cadastro.city} 
-                haslabel label='Cidade' top='mt-5'
+                haslabel label='*Cidade' top='mt-5'
                 >
                 <option key = 'init'>Selecione a cidade</option>
                 {CityValues.estados.find((city) => city.nome == cadastro.state)?.cidades.map((cities, index) => (
@@ -108,7 +122,7 @@ export default function PlaceRegistration() {
           <div className={divImage}>
             <Input   
               haslabel
-              label='Adicone uma imagem'           
+              label='*Adicione uma imagem'           
               type='file' 
               id='image' 
               multiple             
@@ -123,6 +137,7 @@ export default function PlaceRegistration() {
               h='h-14' 
               textColor='text-white' 
               textWeight='font-bold'
+              onClick={() => registerFunction(name, state, city, commentary, address, imgs)}
             >
                 CADASTRAR
             </Button>

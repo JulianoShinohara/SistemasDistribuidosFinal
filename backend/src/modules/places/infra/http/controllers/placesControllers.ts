@@ -80,7 +80,7 @@ export default class PlacesControllers {
 
     public async total(req: Request, res: Response) {
         try {
-            const { name, city, state, street, reference, tags, images, commentary } = req.body;
+            const { name, city, state, street, reference, images, commentary } = req.body;
 
             const createPlacesService = new CreateTotalPlacesService(
                 new PlacesRepository(),
