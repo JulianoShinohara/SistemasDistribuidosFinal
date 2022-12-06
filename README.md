@@ -25,7 +25,6 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 
 ## Stack
 - NextJS (front-end)
-- Typescript (front-end)
 - Node JS (back-end)
 - PostgreSQL
 
