@@ -19,7 +19,7 @@ function Button({
     ...rest 
 }: IButtonProps) {
     return (           
-        <button className={`${buttonStyle} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight}`}
+        <button className={`${buttonStyle} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight}`} 
         {...rest}
         />        
     );

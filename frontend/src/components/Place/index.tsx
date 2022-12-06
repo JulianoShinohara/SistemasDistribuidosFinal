@@ -17,12 +17,6 @@ export default function Place({place}: IPlaceProps) {
             
       <h2 className={textLocation}>{place.city} - {place.state}</h2>
       
-      <div className='flex items-center'>
-        <h1 className='text-textTitle'>{place.numberOfLikes}</h1>
-        <div className='ri-star-fill text-yellow-200 ri-2x'/>
-      </div>
-      
-    
       <div className='w-full h-full bg-black rounded-lg' >
         
       </div>

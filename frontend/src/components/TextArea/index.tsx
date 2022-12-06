@@ -13,7 +13,7 @@ function TextArea({
     haslabel = false, 
     label, 
     top = "mt-0",
-    bg = "bg-grayBg",   
+    bg = "bg-Input",   
     ...rest
 }: ITextAreaProps) {
     if(haslabel) {
