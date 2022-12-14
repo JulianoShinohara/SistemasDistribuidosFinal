@@ -27,6 +27,7 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 - Next/router
 - Remix icon
 - Tailwind CSS
+- socket.io-client
 
 ## Dependências do Banck-end
 - Cors
@@ -34,6 +35,7 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 - Sequelize
 - UUIDV4
 - Express
+- socket.io
 
 ## :warning: IMPORTANTE
 ### Back-end
