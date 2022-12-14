@@ -18,7 +18,6 @@ class Places extends Model {
 
     static associate(models) {
         this.hasOne(models.Addresses, { foreignKey: 'places_id', as: 'address'})
-        this.hasMany(models.Tags, { foreignKey: 'places_id', as: 'tags'} )
         this.hasMany(models.Images, { foreignKey: 'places_id', as: 'images'} )
         this.hasMany(models.Commentary, { foreignKey: 'places_id', as: 'commentary'} )
 
