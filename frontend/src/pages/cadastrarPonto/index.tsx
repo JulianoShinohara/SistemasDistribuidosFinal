@@ -1,6 +1,6 @@
 import 'remixicon/fonts/remixicon.css';
 import React, { useCallback, useState } from "react"
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { Input } from "../../components/Input"
@@ -10,25 +10,15 @@ import { divGeneral, divImage, divInput, divRegister, textTitle } from "./styles
 import { TextArea } from '../../components/TextArea';
 import api  from '../../services/api';
 
-export interface ICadastro {
-  name: string;
-  city: string;
-  state: string;
-  image: string;
-  commentary: string;
-  address: string;
-}
-
 export default function PlaceRegistration() {
-  const [cadastro, setCadastro] = useState<ICadastro>({} as ICadastro);
+  const router = useRouter();
 
   const [name, setName] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>(''); 
   const [commentary, setCommentary] = useState<string>(''); 
-  const [image, setImage] = useState<string>('');
-
+  const [imgs, setImgs] = useState<string>('');
 
   const handleUF = useCallback((state:string) => {
     setState(state)
@@ -41,6 +31,48 @@ export default function PlaceRegistration() {
   function goBack() {
     router.push('/PesquisarLocais')
   }
+
+  const register = useCallback(async () => {
+    console.log(name, address, state, city, commentary, imgs)
+    if(state && city && name && address && commentary && imgs) {
+        alert('Estamos fazendo o seu cadastro, por favor aguarde.')
+        registerFunction(name, state, city, commentary, address, imgs)     
+    } else {
+        alert('Por favor, preencha todos os campos necessários (*).')
+    }
+  }, [name, address, state, city, commentary, imgs])
+
+  async function registerFunction(name: string, state: string, city: string, commentary: string, address: string, images: string) {
+    try {
+      const response = await api.post('/places', {
+        name,
+        images,
+        commentary,
+        address
+      })
+
+      if(response.status.toString().startsWith('2')) {
+        try {
+          const responseAddress = await api.post(`/addresses/${response.data.id}`, {
+            state,
+            city,
+            reference: '_',
+            street: address
+          });
+  
+          if(responseAddress.status.toString().startsWith('2')) {
+            alert('Cadastro realizado com sucesso!')
+            router.push('/PesquisarLocais')
+          }
+        } catch {
+          alert('Erro ao cadastrar, tente novamente.')
+        }
+      }
+    } catch {
+      alert('Erro ao cadastrar, tente novamente.')
+    }
+}
+  
 
   return (
     <div>
@@ -61,45 +93,45 @@ export default function PlaceRegistration() {
 
           <Input 
             haslabel 
-            label='Nome' 
+            label='*Nome' 
             placeholder='ex: Parque nacional da Tijuca'
             top='mt-5'
-            value={cadastro.name} 
+            value={name} 
             onChange={(e) => setName(e.target.value)}
           />
           <div className={divInput}>
             <Input 
               haslabel 
-              label='Endereço' 
+              label='*Endereço' 
               placeholder='ex: av. paulista, 1000' 
               top='mt-5'
-              value={cadastro.address}
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
             />           
           </div>
           <TextArea
             haslabel 
-            label='Comentário' 
+            label='*Comentário' 
             placeholder='ex: Lugar lindo'
             top='mt-5'
-            value={cadastro.commentary}
+            value={commentary}
             onChange={(e) => setCommentary(e.target.value)}
           />
 
           <div className={divInput}>
-            <Select onChange = {(e) => handleUF(e.target.value)} value = {cadastro.state} 
-                haslabel label='Estado' top='mt-5'
+            <Select onChange = {(e) => handleUF(e.target.value)} value = {state} 
+                haslabel label='*Estado' top='mt-5'
                 >
                 <option key = 'init'>Selecione o Estado</option>
                 {CityValues.estados.map((uf, index) => (
                     <option key ={index.toString()} value = {uf.nome}>{uf.nome}</option>
                 ))}
             </Select>
-            <Select onChange = {(e) => handleCity(e.target.value)} value = {cadastro.city} 
-                haslabel label='Cidade' top='mt-5'
+            <Select onChange = {(e) => handleCity(e.target.value)} value = {city} 
+                haslabel label='*Cidade' top='mt-5'
                 >
                 <option key = 'init'>Selecione a cidade</option>
-                {CityValues.estados.find((city) => city.nome == cadastro.state)?.cidades.map((cities, index) => (
+                {CityValues.estados.find((city) => city.nome == state)?.cidades.map((cities, index) => (
                     <option key ={index.toString()}  value = {cities}>{cities} </option>
                 ))}
             </Select>
@@ -108,10 +140,11 @@ export default function PlaceRegistration() {
           <div className={divImage}>
             <Input   
               haslabel
-              label='Adicone uma imagem'           
+              label='*Adicione uma imagem'           
               type='file' 
               id='image' 
-              multiple             
+              multiple    
+              onChange={(e) => setImgs(e.target.value)}        
               />
           </div>
 
@@ -123,6 +156,7 @@ export default function PlaceRegistration() {
               h='h-14' 
               textColor='text-white' 
               textWeight='font-bold'
+              onClick={() => register()}
             >
                 CADASTRAR
             </Button>

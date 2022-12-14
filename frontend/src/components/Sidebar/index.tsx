@@ -20,6 +20,14 @@ export default function Sidebar() {
     setCity(city)
     }, [])
 
+    function search() {
+        if(state !== '' && city !== '') {
+            router.push(`/PesquisarLocais?state=${state}&city=${city}`)
+        } else if(state !== '') {
+            router.push(`/PesquisarLocais?state=${state}`)
+        }
+    }
+
     const logout = useCallback(() => {
         signOut({ callbackUrl: '/' });
     }, []);
@@ -73,6 +81,7 @@ export default function Sidebar() {
                         h='h-14' 
                         textColor='text-white' 
                         textWeight='font-bold'
+                        onClick={search}
                         >
                             FILTRAR
                         </Button>
@@ -81,8 +90,8 @@ export default function Sidebar() {
 
             </div>
             <InfoNavSection 
-                email={session ? session.user.email as string : ''} 
-                name={session ? session.user.name as string: ''} 
+                email={session ? session?.user?.email as string : ''} 
+                name={session ? session?.user?.name as string: ''} 
                 logout={logout} 
             />
         </div>
