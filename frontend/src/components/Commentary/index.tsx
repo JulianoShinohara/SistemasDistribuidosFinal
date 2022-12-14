@@ -1,22 +1,25 @@
 import { HStack } from "@chakra-ui/react";
 import React from "react"
-import { IPlace } from "../../models/IPlace";
+import { ICommentary } from "../../models/ICommentary";
+import { format } from 'date-fns';
 
-interface IPlaceProps {
-  place: IPlace;
+interface ICommentaryProps {
+  commentary: ICommentary;
+  excludeCommentary: (id: string) => void;
+  userId: string;
 }
-export default function Commentary({place}: IPlaceProps) {
+export default function Commentary({commentary, excludeCommentary, userId}: ICommentaryProps) {
   
   return (
     <div className="p-2">     
           <h1 className="text-black">
-            <b>Comentário: </b>{place.commentary}
+            <b>{commentary.commentary.split('*t*u*r/GABY/*t*u*r/')[0]}: </b>{commentary.commentary.split('*t*u*r/GABY/*t*u*r/')[2]}
           </h1>
-          <HStack >
-            <h1>Criado: </h1>
-            <div className="flex justify-end">
-              <button className="bg-warning font-semibold rounded-lg text-sm p-1">excluir</button>
-            </div>
+          <HStack justifyContent='space-between'>
+            <h1 className="text-sm">Criado: {format(new Date(commentary.createdAt), 'dd/MM/yyyy')}</h1>
+            {commentary.commentary.split('*t*u*r/GABY/*t*u*r/')[1] === userId && <div className="flex justify-end">
+              <button className="bg-warning font-semibold rounded-lg text-sm p-1" onClick={() => excludeCommentary(commentary.id)}>excluir</button>
+            </div>}
 
           </HStack>
     </div>

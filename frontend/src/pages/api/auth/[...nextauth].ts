@@ -9,7 +9,7 @@ export default NextAuth ({
     })
   ],
   callbacks: {
-    async session(session: any) {
+    async session(session) {
       return session;
     },
     async signIn(user: any, account: any, profile: any) {

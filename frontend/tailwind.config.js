@@ -47,6 +47,7 @@ module.exports = {
       "logo": "url('/images/logo.png')",
       "header": "url('/images/background.png')",
       "teste": "url('/images/teste.png')",
+      "place": "url('https://images.unsplash.com/photo-1653161752453-0e00805678b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80')"
     }
   },
   },
