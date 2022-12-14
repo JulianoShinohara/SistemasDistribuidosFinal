@@ -51,4 +51,17 @@ export default class AddressesControllers {
 
         }
     }
+
+    public async delete(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+
+            await Commentary.destroy({where: {id}})
+
+            return res.json({'ok': true});
+        } catch (err: any) {
+            return res.status(400).json({ error: err.message })
+
+        }
+    }
 }

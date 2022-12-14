@@ -1,9 +1,7 @@
 import 'remixicon/fonts/remixicon.css';
-import React, { useEffect, useState } from "react"
-import router from 'next/router';
+import React, { useState } from "react"
 import Header from '../../components/Header';
 import { divGeneral, textTitle } from './styles';
-import { GetServerSideProps } from 'next';
 import { ButtonGitHub } from '../../components/ButtonGitHub';
 import { signIn, useSession } from 'next-auth/client';
 import { Spinner } from '@chakra-ui/react';
@@ -14,6 +12,7 @@ export default function Login() {
 
   async function handleSignIn() {
     setLoading(true);
+    localStorage.setItem('userId', Math.random().toString());
     await signIn('github', { callbackUrl: '/PesquisarLocais' }).finally(() => {
       setLoading(false);
     })

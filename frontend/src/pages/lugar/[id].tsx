@@ -11,6 +11,9 @@ import { TextArea } from '../../components/TextArea';
 import Commentary from '../../components/Commentary';
 import api from '../../services/api';
 import { HStack, Spinner } from '@chakra-ui/react';
+import { io } from 'socket.io-client';
+import { useSession } from 'next-auth/client';
+import { ICommentary } from '../../models/ICommentary';
 
 type CommentaryType = {
   commentary: string;
@@ -20,22 +23,41 @@ type CommentaryType = {
   openAddModal: boolean;
 }
 
+const socket = io('http://localhost:3333');
+
 export default function Search() {
+  const [session] = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [place, setPlace] = useState<IPlace>({} as IPlace);
-  const [starButton, setStarButton] = useState(false);
   const [commentaryStates, setCommentaryStates] = useState<CommentaryType>({ } as CommentaryType);
+  const [userId, setUserId] = useState<string>('');
+  const [commentary, setCommentary] = useState<ICommentary[]>([] as ICommentary[]);
   
-  function handleButtonAddCommentary(){
+  async function handleButtonAddCommentary(){
     setCommentaryStates({...commentaryStates, openAddModal: !commentaryStates.openAddModal});
+    await api.post(`/commentary/${router.query.id}`, {
+      commentary: `${session?.user?.name}*t*u*r/GABY/*t*u*r/${userId}*t*u*r/GABY/*t*u*r/${commentaryStates.commentary}`,
+    }).then(() => {
+      socket.emit('commentary', userId, router.query.id);
+      getCommentary();
+    }).catch(() => {
+      alert('Erro ao adicionar comentário');
+    })
+  }
+
+  async function excludeCommentary(id: string){
+    await api.delete(`/commentary/one/${id}`).then(() => {
+      socket.emit('delete', userId, router.query.id);
+      getCommentary();
+    }).catch(() => {
+      alert('Erro ao excluir comentário');
+    })
   }
 
   async function handleAddCommentary() {
     if(commentaryStates.commentary){
-     
-      
-    handleButtonAddCommentary();
+      handleButtonAddCommentary();
     }
   }
 
@@ -47,13 +69,30 @@ export default function Search() {
     } catch {}
   }
 
+  async function getCommentary() {
+    try {
+      const response = await api.get(`/commentary/all`);
+      console.log(response.data)
+      setCommentary(response.data.filter((commentary: ICommentary) => commentary.places.id === router.query.id));
+    } catch {}
+  }
+
+  socket.on('getCommentary', (placeId: string) => getCommentary())
+  
   useEffect(() => {
     getPlace();
+    socket.emit('newUser', userId);
+    socket.emit('joinPlace', userId, router.query.id);
+    socket.on('getCommentary', (placeId: string) => getCommentary())
+    getCommentary();
   }, [router]);
 
-  function useButtonStar() {
-    setStarButton(!starButton);
-}
+  useEffect(() => {
+    if(typeof window !== 'undefined'){
+      setUserId(localStorage.getItem('userId') as string);
+    }
+  }, [])
+
 
   return (
     <div>
@@ -72,7 +111,7 @@ export default function Search() {
 
               <h1 className={textLocation}>{place.address?.city} - {place.address?.state}</h1>
 
-              <div className='w-559 h-462 bg-black rounded-3xl'/>
+              <div className='w-559 h-462 bg-place bg-cover rounded-3xl'/>
               
               <HStack>
                 <i className="ri-map-pin-line"/>
@@ -94,16 +133,18 @@ export default function Search() {
                   h='h-10' 
                   textColor='text-white' 
                   textWeight='font-semibold'
-                  onClick={handleButtonAddCommentary}
+                  onClick={() => setCommentaryStates({...commentaryStates, openAddModal: !commentaryStates.openAddModal})}
                 >
                     Adicionar comentário
                 </Button>
               </div>   
 
               <div className={divCommentary}>
-                <div className={line}>
-                  <Commentary place={place}/>  
-                </div>
+                {commentary.map((commentary, i) => (
+                  <div key={i} className={line}>
+                    <Commentary commentary={commentary} excludeCommentary={(id) => excludeCommentary(id)} userId={userId}/>  
+                  </div>
+                ))}
               </div>
               
             </div>
