@@ -23,9 +23,12 @@ function ButtonGitHub({
     ...rest 
 }: IButtonProps) {
     return (           
-        <button className={`${buttonStyle} ${iconSize} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight} ${icon}`} 
+        <button className={`${buttonStyle} ${iconSize} ${bg} ${rounded} ${textColor} ${w} ${h} ${textWeight} flex items-center justify-center`} 
         {...rest}
-        />        
+        >
+            {icon && <i className={`${icon} mr-2`}/>}
+            {rest.children}
+        </button>      
     );
 }
 
