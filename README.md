@@ -98,12 +98,13 @@ yarn dev
 ![alt text](arquitetura-do-sistema.png)
 
 ## Interface de serviço
-![alt text](servidor.png)
 
 ### Servidor
-![alt text](cliente.png)
+![alt text](servidor.png)
 
 ### Cliente
+![alt text](cliente.png)
+
 ### Contato
 | Nome                          | Contato                                |
 | ----------------------------- |:--------------------------------------:|
