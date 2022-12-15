@@ -97,6 +97,13 @@ yarn dev
 ## Arquitetura e funcionamento do sistema
 ![alt text](arquitetura-do-sistema.png)
 
+## Interface de serviço
+![alt text](servidor.png)
+
+### Servidor
+![alt text](cliente.png)
+
+### Cliente
 ### Contato
 | Nome                          | Contato                                |
 | ----------------------------- |:--------------------------------------:|

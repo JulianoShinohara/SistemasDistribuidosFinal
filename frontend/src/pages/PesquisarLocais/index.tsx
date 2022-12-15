@@ -1,6 +1,6 @@
 import 'remixicon/fonts/remixicon.css';
-import React, { useCallback, useEffect, useState } from "react"
-import router, { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react"
+import { useRouter } from 'next/router';
 import { divGeneral } from "./styles"
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
