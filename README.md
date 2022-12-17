@@ -96,6 +96,7 @@ yarn dev
 ![alt text](arquitetura-do-sistema.png)
 
 ## Interface de serviço
+![alt text](Interface-de-serviço.png)
 
 ### Servidor
 ![alt text](servidor.png)
