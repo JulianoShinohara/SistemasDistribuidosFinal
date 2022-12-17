@@ -23,11 +23,13 @@ O sistema criado tem o mesmo intuitivo de uma rede social, porém focado para co
 - Node JS (back-end)
 - PostgreSQL
 
+
 ## Dependências do Front-end
 - Next/router
 - Remix icon
 - Tailwind CSS
 - socket.io-client
+- Cloudinary
 
 ## Dependências do Banck-end
 - Cors
@@ -96,11 +98,11 @@ GOOGLE_CLIENT_SECRET=
 NEXTAUTH_URL=
 
 JWT_SECRET=
-```
+
 # Images
 API_KEY=
 API_SECRET=
-
+```
 Na pasta frontend instale as dependências com o comando:
 ```
 yarn 
