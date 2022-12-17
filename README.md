@@ -83,6 +83,24 @@ yarn dev:server
 
 
 ## Front-end
+Para rodar o front corretamente é necessário pegar o arquivo .env.exemplo como exemplo e criar um .env com seus dados. Para as imagens foi utilizado o Cloudinary, então se faz necessário criar uma conta (é gratuito).
+```
+# GitHub
+GITHUB_CLIENT_ID=
+GITHUB_SECRET_ID= 
+
+# Google
+GOOGLE_CLIENT_ID= 
+GOOGLE_CLIENT_SECRET= 
+
+NEXTAUTH_URL=
+
+JWT_SECRET=
+```
+# Images
+API_KEY=
+API_SECRET=
+
 Na pasta frontend instale as dependências com o comando:
 ```
 yarn 
