@@ -39,7 +39,7 @@ export default function Search() {
     await api.post(`/commentary/${router.query.id}`, {
       commentary: `${session?.user?.name}*t*u*r/GABY/*t*u*r/${userId}*t*u*r/GABY/*t*u*r/${commentaryStates.commentary}`,
     }).then(() => {
-      socket.emit('commentary', userId, router.query.id);
+      socket.emit('commentary', userId, router.query.id); // manda pro back
       getCommentary();
     }).catch(() => {
       alert('Erro ao adicionar comentário');
@@ -48,7 +48,7 @@ export default function Search() {
 
   async function excludeCommentary(id: string){
     await api.delete(`/commentary/one/${id}`).then(() => {
-      socket.emit('delete', userId, router.query.id);
+      socket.emit('delete', userId, router.query.id); 
       getCommentary();
     }).catch(() => {
       alert('Erro ao excluir comentário');
@@ -111,7 +111,12 @@ export default function Search() {
 
               <h1 className={textLocation}>{place.address?.city} - {place.address?.state}</h1>
 
-              <div className='w-559 h-462 bg-place bg-cover rounded-3xl'/>
+              <div 
+                className='w-559 h-462 bg-cover rounded-3xl'
+                style={{
+                  backgroundImage: `url(${place.images.length > 0 ? place.images[0]?.image : 'https://images.unsplash.com/photo-1653161752453-0e00805678b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80'})`
+                }}
+              />
               
               <HStack>
                 <i className="ri-map-pin-line"/>

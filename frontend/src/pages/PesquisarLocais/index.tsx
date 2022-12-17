@@ -15,6 +15,7 @@ export default function Search() {
   async function getPlace() {
     try {
       const response = await api.get('/places/all');
+      console.log(response.data)
       if(router.query && 
         router.query.city as string && 
         router.query.state as string

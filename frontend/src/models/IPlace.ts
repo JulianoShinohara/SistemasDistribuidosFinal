@@ -1,7 +1,12 @@
+interface Image {
+    id: string;
+    image: string;
+}
+
 export interface IPlace {
     id: string;
     name: string;
-    image: string;
+    images: Image[];
     commentary: string;
     address: {
         city: string;

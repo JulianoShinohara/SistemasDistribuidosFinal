@@ -1,6 +1,5 @@
 import 'remixicon/fonts/remixicon.css';
-import React, { useState } from "react"
-import Header from '../../components/Header';
+import React, { useState } from "react";
 import { divGeneral, textTitle } from './styles';
 import { ButtonGitHub } from '../../components/ButtonGitHub';
 import { signIn, useSession } from 'next-auth/client';
@@ -18,9 +17,19 @@ export default function Login() {
     })
   }
 
+  async function handleSignInGoogle() {
+    setLoading(true);
+    localStorage.setItem('userId', Math.random().toString());
+    await signIn('google', { callbackUrl: '/PesquisarLocais' }).finally(() => {
+      setLoading(false);
+    })
+  }
+
   return (
     <div>
-      <Header/>
+      <div className="fixed w-full bg-cover bg-header p-5 flex justify-between">     
+      <div className="h-28 w-28 bg-cover bg-teste "/>        
+    </div>
      
       <div className={divGeneral}>
         <div className='bg-white p-5 rounded-lg w-471'>
@@ -39,6 +48,22 @@ export default function Login() {
               onClick = {handleSignIn}
             >
               {loading ? <Spinner size='sm'/> : <span className='mb-2 text-3xl'>GitHub</span>}
+            </ButtonGitHub>                
+          </div> 
+
+          <div className='pt-5'>       
+            <ButtonGitHub 
+              type="submit" 
+              icon={!loading ? 'ri-google-line' : ''} 
+              bg='bg-textTitle' 
+              rounded='rounded-lg' 
+              w='w-full' 
+              h='h-12' 
+              textColor='text-white' 
+              textWeight='font-bold'
+              onClick = {handleSignInGoogle}
+            >
+              {loading ? <Spinner size='sm'/> : <span className='mb-2 text-3xl'>Google</span>}
             </ButtonGitHub>                
           </div> 
         </div>

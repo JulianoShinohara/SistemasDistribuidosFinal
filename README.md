@@ -92,8 +92,6 @@ Rode o frontend executando:
 yarn dev
 ```
 
-
-
 ## Arquitetura e funcionamento do sistema
 ![alt text](arquitetura-do-sistema.png)
 

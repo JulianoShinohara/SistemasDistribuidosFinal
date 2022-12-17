@@ -7,8 +7,8 @@ import { Input } from "../../components/Input"
 import { Select } from "../../components/Select"
 import CityValues from '../../contents/city';
 import { divGeneral, divImage, divInput, divRegister, textTitle } from "./styles"
-import { TextArea } from '../../components/TextArea';
 import api  from '../../services/api';
+import axios from 'axios';
 
 export default function PlaceRegistration() {
   const router = useRouter();
@@ -17,7 +17,6 @@ export default function PlaceRegistration() {
   const [address, setAddress] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>(''); 
-  const [commentary, setCommentary] = useState<string>(''); 
   const [imgs, setImgs] = useState<string>('');
 
   const handleUF = useCallback((state:string) => {
@@ -33,46 +32,76 @@ export default function PlaceRegistration() {
   }
 
   const register = useCallback(async () => {
-    console.log(name, address, state, city, commentary, imgs)
-    if(state && city && name && address && commentary && imgs) {
-        alert('Estamos fazendo o seu cadastro, por favor aguarde.')
-        registerFunction(name, state, city, commentary, address, imgs)     
+    if(state && city && name && address && imgs) {
+      alert('Estamos fazendo o seu cadastro, por favor aguarde.')
+      registerFunction(name, state, city, address, imgs)     
     } else {
-        alert('Por favor, preencha todos os campos necessários (*).')
+      alert('Por favor, preencha todos os campos necessários (*).')
     }
-  }, [name, address, state, city, commentary, imgs])
+  }, [name, address, state, city, imgs])
 
-  async function registerFunction(name: string, state: string, city: string, commentary: string, address: string, images: string) {
-    try {
-      const response = await api.post('/places', {
-        name,
-        images,
-        commentary,
-        address
-      })
+  async function sendToCloudnary() {
+    const response = await axios({
+      method: 'get',
+      url: imgs,
+      responseType: 'blob'
+    });
+    var reader = new FileReader();
+    reader.readAsDataURL(response.data);
+    reader.onloadend = function() {
+      var base64Data = reader.result;
+      const formData = new FormData();
+      formData.append("file", base64Data as string); 
+      formData.append("api_key", '918866286869879');
+      formData.append("timestamp", (new Date() as any / 1000).toString() || '0'); 
+      formData.append("upload_preset", "Turistando");
+      axios({
+        method: 'POST',
+        url: 'https://api.cloudinary.com/v1_1/dhmxzmv2k/upload',
+        data: formData,
+      }).then(async res => {
+        const response = await api.post('/places', {
+          name,
+          images: res.data.url,
+          address
+        })
 
-      if(response.status.toString().startsWith('2')) {
-        try {
-          const responseAddress = await api.post(`/addresses/${response.data.id}`, {
-            state,
-            city,
-            reference: '_',
-            street: address
-          });
-  
-          if(responseAddress.status.toString().startsWith('2')) {
-            alert('Cadastro realizado com sucesso!')
-            router.push('/PesquisarLocais')
+        if(response.status.toString().startsWith('2')) {
+          try {
+            const responseAddress = await api.post(`/addresses/${response.data.id}`, {
+              state,
+              city,
+              reference: '_',
+              street: address
+            });
+    
+            if(responseAddress.status.toString().startsWith('2')) {
+              try {
+                const responseImages = await api.post(`/images/${response.data.id}`, {
+                  image: res.data.url,
+                });
+
+                if(responseImages.status.toString().startsWith('2')) {
+                  alert('Cadastro realizado com sucesso!')
+                  router.push(`/lugar/${response.data.id}`)
+                }
+              } catch {}
+            }
+          } catch {
+            alert('Erro ao cadastrar, tente novamente.')
           }
-        } catch {
-          alert('Erro ao cadastrar, tente novamente.')
         }
-      }
+      })
+    }
+  }
+
+  async function registerFunction(name: string, state: string, city: string, address: string, images: string) {
+    try {
+      sendToCloudnary();
     } catch {
       alert('Erro ao cadastrar, tente novamente.')
     }
-}
-  
+} 
 
   return (
     <div>
@@ -109,15 +138,7 @@ export default function PlaceRegistration() {
               onChange={(e) => setAddress(e.target.value)}
             />           
           </div>
-          <TextArea
-            haslabel 
-            label='*Comentário' 
-            placeholder='ex: Lugar lindo'
-            top='mt-5'
-            value={commentary}
-            onChange={(e) => setCommentary(e.target.value)}
-          />
-
+         
           <div className={divInput}>
             <Select onChange = {(e) => handleUF(e.target.value)} value = {state} 
                 haslabel label='*Estado' top='mt-5'
@@ -142,9 +163,13 @@ export default function PlaceRegistration() {
               haslabel
               label='*Adicione uma imagem'           
               type='file' 
-              id='image' 
-              multiple    
-              onChange={(e) => setImgs(e.target.value)}        
+              id='image'     
+              onChange={(e) => {
+                if(e.target && e.target.files && e.target.files[0]) {
+                  const blob = new Blob([e.target.files[0]], { type: 'image/jpeg' });
+                  setImgs(window.URL.createObjectURL(blob))
+                }
+              }}        
               />
           </div>
 

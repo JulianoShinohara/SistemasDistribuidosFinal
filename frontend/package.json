@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.224.0",
-    "@chakra-ui/react": "^2.4.2",
+    "@chakra-ui/react": "^2.4.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@prismicio/client": "^6.7.1",

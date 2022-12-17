@@ -8,7 +8,7 @@ require('../sequelize');
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors()) // precisa ser igual a url do front
 app.use((req, res, next) => {
   
     // Website you wish to allow to connect
@@ -53,7 +53,7 @@ io.on('connection', (socket: any) => {
 
   // Quando há um novo novo usuário, o socket dispara esse "evento".
   socket.on('newUser', (id: any) => {
-    const socketAlreadyExist = users.filter(el => el.socketId === socket.id);
+    const socketAlreadyExist = users.filter(el => el.socketId === socket.id); // Verifica se o socket já existe.
     const idAlreadyExist = users.filter(el => el.id === id);
     if(id !== '' && socketAlreadyExist.length === 0 && idAlreadyExist.length === 0) {
       users.push({ id, socketId: socket.id });
@@ -77,7 +77,11 @@ io.on('connection', (socket: any) => {
   socket.on('createPlaceRoom', (id: any, placeId: any) => {
     io.emit('getRoom')
   })
+  // emit = vai emitar algo para algum lugar para aquela pessoa que esta ao contrario de voce
+  // front emite para back e vice versa 
 
+
+  // on = fica esperando algo a ser emitido
   // Novo comentario
   socket.on('commentary', (id: any, placeId: any) => {
     for(const user of users) {
@@ -108,3 +112,6 @@ io.on('connection', (socket: any) => {
     }
   });
 })
+
+// forma de conectar diferentes
+// 
